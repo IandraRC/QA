@@ -20,7 +20,9 @@ header {
 
 /* ===== Logo ===== */
 .logo img {
-  height: 50px;
+  height: 60px;      /* aumenta a altura */
+  width: auto;       /* mantém proporção original */
+  border-radius: 10px; /* opcional: deixa cantos levemente arredondados */
 }
 
 /* ===== Menu principal ===== */
@@ -47,29 +49,54 @@ header {
 /* ===== Hover e link ativo ===== */
 .menu a:hover,
 .menu a.active {
-  color: #6e2b3c;
-  border-bottom: 2px solid #6e2b3c;
+  color: #A24C5D;
+  border-bottom: 2px solid #A24C5D;
   padding-bottom: 2px;
 }
 
 /* ===== Dropdown ===== */
+.dropdown {
+  position: relative;
+}
+
+/* Submenu oculto inicialmente */
 .dropdown .submenu {
-  display: none;
   position: absolute;
-  background-color: #f7f7f7;
-  top: 35px;
+  top: 48px;
   left: 0;
+  background-color: #d9d9d9;
   list-style: none;
   border-radius: 4px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.15);
-  min-width: 180px;
+  min-width: 200px;
   padding: 10px 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 999;
 }
 
-.dropdown:hover .submenu {
-  display: block;
+/* Exibe o submenu quando o mouse estiver sobre o menu ou submenu */
+.dropdown:hover .submenu,
+.dropdown .submenu:hover {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
+/* Área invisível entre menu e submenu para tolerância do mouse */
+.dropdown::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 25px; /* Aumente se quiser mais tempo de tolerância */
+  background: transparent;
+}
+
+/* ===== Estilo dos itens do submenu ===== */
 .submenu li {
   padding: 8px 20px;
 }
@@ -78,12 +105,15 @@ header {
   color: #000;
   font-weight: 400;
   display: block;
+  text-decoration: none;
+  transition: 0.2s;
 }
 
 .submenu li a:hover {
-  color: #6e2b3c;
-  background-color: #eee;
+  color: #f5f6fa;
+  background-color: #A24C5D;
 }
+
 
 /* ===== Responsivo ===== */
 @media (max-width: 768px) {
@@ -105,20 +135,158 @@ header {
   }
 }
 
-/* ===== Corpo da página ===== */
-main {
-  font-family: "Segoe UI", Arial, sans-serif;
-  padding: 40px;
+/* ===== Seção de introdução ===== */
+.intro {
   text-align: center;
+  padding: 60px 20px;
   background: #f5f6fa;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
-h1 {
-  color: #333;
-  margin-bottom: 10px;
+.intro h1 {
+  font-size: 2.2em;
+  color: #752838;
+  margin-bottom: 25px;
 }
 
-p {
-  color: #555;
+.intro .descricao {
   font-size: 1.1em;
+  color: #000;
+  max-width: 750px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
 }
+
+.justificado {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.imagem-intro img {
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  border: 4px solid #f5f6fa; /* cria borda na cor do fundo para suavizar o contraste */
+}
+
+/* ===== Seção de conteúdo interna ===== */
+.conteudo {
+  background: #f5f6fa;
+  padding: 60px 40px;
+  font-family: "Poppins", Arial, sans-serif;
+  text-align: left; /* tudo alinhado à esquerda */
+  color: #333;
+  line-height: 1.7;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Título principal */
+.conteudo h1 {
+  font-size: 2rem;
+  color: #752838;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-align: center; /* <-- centraliza apenas o h1 */
+}
+
+/* Subtítulos */
+.conteudo h3 {
+  color: #752838;
+  font-size: 1.4rem;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.conteudo h4 {
+  color: #A24C5D;
+  font-size: 1.1rem;
+  margin-top: 1.3rem;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+
+/* Parágrafos */
+.conteudo p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  text-align: left;
+}
+
+/* Linha com ícone e texto na mesma linha */
+.inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 0.2rem;
+}
+
+.arrow {
+  font-size: 1rem;
+}
+
+strong {
+  color: #A24C5D;
+}
+
+em {
+  font-style: italic;
+  color: #555;
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 600px) {
+  .conteudo {
+    padding: 40px 20px;
+  }
+
+  .conteudo h1 {
+    font-size: 1.6rem;
+  }
+
+  .conteudo h3 {
+    font-size: 1.2rem;
+  }
+
+  .conteudo h4 {
+    font-size: 1rem;
+  }
+}
+/* ===== Estilo dos tópicos do STLC ===== */
+.conteudo h4 {
+  font-size: 1.05rem;
+  font-weight: 400;
+  margin-top: 1.2rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.step-title {
+  color: #A24C5D;
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+/* Texto da seta abaixo */
+.inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 0.3rem;
+  margin-left: 1.2rem; /* leve recuo */
+}
+
+.arrow {
+  font-size: 1rem;
+}
+
+.inline strong {
+  color: #000;
+}
+
+.inline em {
+  color: #555;
+}
+
